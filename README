@@ -1,0 +1,43 @@
+DeepLearning4J on Service Fabric
+================================
+
+日本語
+-----
+このリポジトリでDeepLearning4JのニューラルネットワークをService Fabric ClusterのStatelessService
+に展開する方法の一つを紹介します。
+
+利用手順
+
+- モデルを作成する
+    - bashのターミナルを開き
+    - training/iris-modelにcdし
+    - ./package.shを実行
+    - できたnugetパッケージをローカルのリポジトリにプッシュnuget push target/nuget/Example.IrisModel.1.0.0.nupkg -Source local
+- Service Fabric Applicationのパッケージを作成
+    - bashのターミナルを開き
+    - service/IrisApp/Scriptsにcd
+    - ./build.shを実行
+    - service/IrisApp/ApplicationPackageRootがデプロイ出来る状態です。
+
+deploy-local.ps1を利用してローカルのService Fabricにデプロイできます。
+
+English
+-------
+
+This repository shows how to run a DeepLearning4J neural network inside a
+Service Fabric Cluster StatelessService.
+
+Steps:
+
+- Train a model
+    - Open a bash terminal (Git Bash on Windows)
+    - cd to training/iris-model
+    - run ./package.sh
+    - publish the resulting nuget package with nuget push target/nuget/Example.IrisModel.1.0.0.nupkg -Source local
+- Build a Service Fabric Application package
+    - Open a bash terminal
+    - cd to service/IrisApp/Scripts/
+    - run ./build.sh
+    - ApplicationPackageRoot is now a deployable Service Fabric Application package
+
+You can use deploy-local.ps1 to deploy it to your local Service Fabric instance.

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 Name="IrisService"
+                 Version="1.0.0.0"
+                 xmlns="http://schemas.microsoft.com/2011/01/fabric">
+    <ServiceTypes>
+        <StatelessServiceType ServiceTypeName="IrisServiceType" UseImplicitHost="true"/>
+    </ServiceTypes>
+    <CodePackage Name="Code" Version="1.0.0.0">
+        <SetupEntryPoint>
+            <ExeHost>
+                <Program>bin\play-init.bat</Program>
+            </ExeHost>
+        </SetupEntryPoint>
+        <EntryPoint>
+            <ExeHost>
+                <Program>bin\iris-service.bat</Program>
+                <Arguments>"-Dhttp.port=9000"</Arguments>
+                <WorkingFolder>CodePackage</WorkingFolder>
+                <ConsoleRedirection FileRetentionCount="5" FileMaxSizeInKb="2048" />
+            </ExeHost>
+        </EntryPoint>
+    </CodePackage>
+    <DataPackage Name="Data" Version="1.0.0.0" />
+    <Resources>
+        <Endpoints>
+            <Endpoint Name="IrisServiceEndpoint" Protocol="http" Port="9000" Type="Input" />
+        </Endpoints>
+    </Resources>
+</ServiceManifest>
